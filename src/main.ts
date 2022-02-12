@@ -8,14 +8,17 @@ async function server() {
 
   app.useGlobalPipes(new ValidationPipe({ errorHttpStatusCode: 422 }));
 
+  console.log(process.env.KAFKA_URL);
+
   app.connectMicroservice<MicroserviceOptions>({
     transport: Transport.KAFKA,
     options: {
       client: {
-        brokers: ['host.docker.internal:9094'],
+        clientId: 'nest',
+        brokers: [`${process.env.KAFKA_URL}`],
       },
       consumer: {
-        groupId: 'emails',
+        groupId: 'nest',
       },
     },
   });
