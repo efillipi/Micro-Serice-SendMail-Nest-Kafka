@@ -9,8 +9,6 @@ export class SendMailsController {
 
   @MessagePattern('emails')
   create(@Payload(new ValidationPipe()) { value }: KafkaCreateDto) {
-    console.log(value);
-
     return this.sendMailsService.create(value);
   }
 }
