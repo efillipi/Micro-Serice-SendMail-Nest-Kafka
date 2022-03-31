@@ -1,3 +1,4 @@
+import 'dotenv/config';
 import { ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { MicroserviceOptions, Transport } from '@nestjs/microservices';
@@ -13,7 +14,7 @@ async function server() {
     options: {
       client: {
         clientId: 'nest',
-        brokers: [`${process.env.KAFKA_URL}`],
+        brokers: [process.env.KAFKA_URL],
       },
       consumer: {
         groupId: 'nest',
